@@ -1,51 +1,15 @@
 import express from "express";
+import routes from "./scr/routes/postRoutes.js";
 
-const posts = [
-    {
-      id: 1,
-      descricao: "Uma foto teste",
-      imagem: "https://placecats.com/millie/300/150"
-    },
-    {
-      id: 2,
-      descricao: "Gato fazendo yoga",
-      imagem: "https://placecats.com/millie/300/150"
-    },
-    {
-      id: 3,
-      descricao: "Gatinho dormindo",
-      imagem: "https://placecats.com/millie/300/150"
-    }
-    
-  ];
+const app = express(); // Cria uma instância do Express, que será o nosso servidor web.
 
-const app = express();
+routes(app); // Chama a função routes passando a instância do Express como argumento.   
 
-app.use(express.json());// converte o body da requisição para JSON.
-
-app.listen(3000,()=>{
-    console.log("Server is running on port 3000");
+app.listen(3000, () => {
+  console.log("Server em execução na porta 3000"); // Inicia o servidor na porta 3000 e exibe uma mensagem no console.
 });
 
-app.get("/api",(req,res)=>{
-    res.status(200,"OK").send("Boas vindas à imersão!");
-});
 
-app.get("/posts",(req,res)=>{
-    res.status(200,"OK").json(posts);
-});
 
-function buscarPostPorId(id){
-    return posts.findIndex((post)=>{
-        return post.id === Number(id)
-    })
-}   
-app.get("/posts/:id", (req,res)=>{
-    const id = req.params.id;
-    const index = buscarPostPorId(Number(id));
-    if(index>=0){
-        res.status(200,"OK").json(posts[index]);
-    }else{
-     res.status(404,"Not Found").send("Post não encontrado");
-    }
-});
+
+
