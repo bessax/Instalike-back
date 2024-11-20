@@ -46,6 +46,6 @@ app.get("/posts/:id", (req,res)=>{
     if(index>=0){
         res.status(200,"OK").json(posts[index]);
     }else{
-        res.status(404,"Not Found").send("Post não encontrado");
+     res.status(404,"Not Found").send("Post não encontrado");
     }
 });
