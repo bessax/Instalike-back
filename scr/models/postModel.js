@@ -13,4 +13,10 @@ const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
     // Executa uma consulta para encontrar todos os documentos (posts) na coleção e retorna os resultados como um array.
     return colecao.find().toArray();
   }
+
+  export async function criarPost(novoPost) {
+    const db = conexao.db("imersao-instabytes"); // Obtém o banco de dados "imersao-instabytes" da conexão.
+    const colecao = db.collection("posts"); // Obtém a coleção "posts" dentro do banco de dados.
+    return colecao.insertOne(novoPost); // Insere um novo documento (post) na coleção e retorna o resultado da operação.
+  }
   
