@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import conectarAoBanco from "../config/dbConfig.js";
 
 // Conecta-se ao banco de dados utilizando a string de conexão fornecida como variável de ambiente.
@@ -18,5 +19,13 @@ const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
     const db = conexao.db("imersao-instabytes"); // Obtém o banco de dados "imersao-instabytes" da conexão.
     const colecao = db.collection("posts"); // Obtém a coleção "posts" dentro do banco de dados.
     return colecao.insertOne(novoPost); // Insere um novo documento (post) na coleção e retorna o resultado da operação.
+  }
+
+  export async function atualizarPost(id, postAtualizado) {
+    const db = conexao.db("imersao-instabytes"); // Obtém o banco de dados "imersao-instabytes" da conexão.
+    const colecao = db.collection("posts"); // Obtém a coleção "posts" dentro do banco de dados.
+    const objID =ObjectId.createFromHexString(id);// Cria um objeto ID a partir da string fornecida.
+    return colecao.updateOne({ _id:new ObjectId(objID) }, { $set: postAtualizado }); // Atualiza o documento com o ID fornecido e retorna o resultado da operação.
+    //return colecao.updateOne({ _id: ObjectId(id) }, { $set: postAtualizado }); // Atualiza o documento com o ID fornecido e retorna o resultado da operação.
   }
   
