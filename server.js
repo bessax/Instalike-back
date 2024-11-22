@@ -1,5 +1,5 @@
 import express from "express";
-import routes from "./scr/routes/postRoutes.js";
+import routes from "./src/routes/postRoutes.js";
 
 const app = express(); // Cria uma instância do Express, que será o nosso servidor web.
 
